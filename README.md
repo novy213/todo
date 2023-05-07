@@ -1,16 +1,37 @@
 # Info
 null<br>
-# 1.1 Api url
+# Api url
 ```
 http://api.todo/v1
 ```
-# 1.2 Add task to project
+# 1.1 Create new project
 ```
-PUT http://api.todo/v1/project-id
+PUT http://api.todo/v1
 ```
 ### Params:
 ```
-project-id - unique id of project
+(null)
+```
+### Body:
+```
+{
+  "name":"project name",
+}
+```
+### Response: 
+```
+{
+  "error":false,
+  "message": null
+}
+```
+# 1.2 Delete project
+```
+DELETE http://api.todo/v1/{project-id}
+```
+### Params:
+```
+project-id - unique project id
 ```
 ### Body:
 ```
@@ -23,7 +44,28 @@ project-id - unique id of project
   "message": null
 }
 ```
-# 1.3 Remove task to project
+# 2.1 Add task to project
+```
+PUT http://api.todo/v1/{project-id}
+```
+### Params:
+```
+project-id - unique id of project
+```
+### Body:
+```
+{
+  "text":"sample text",
+}
+```
+### Response: 
+```
+{
+  "error":false,
+  "message": null
+}
+```
+# 2.2 Remove task to project
 ```
 DELETE http://api.todo/v1/{project-id}/{taskId}
 ```
@@ -32,13 +74,36 @@ DELETE http://api.todo/v1/{project-id}/{taskId}
 project-id - unique id of project
 taskId - unique id of task
 ```
-###Body:
+### Body:
 ```
 (null)
 ```
-###Response: 
+### Response: 
 ```
 {
   "error":false,
   "message": null
 }
+```
+# Editing task
+```
+PUT http://api.todo/v1/{project-id}/{taskId}
+```
+### Params:
+```
+project-id - unique id of project
+taskId - unique id of task
+```
+### Body:
+```
+{
+  "text":"new text",
+}
+```
+### Response: 
+```
+{
+  "error":false,
+  "message": null
+}
+```
