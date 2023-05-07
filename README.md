@@ -8,7 +8,7 @@ http://api.todo/v1
 ```
 PUT http://api.todo/v1/project-id
 ```
-###Params:
+### Params:
 ```
 project-id - unique id of project
 ```
@@ -27,7 +27,7 @@ project-id - unique id of project
 ```
 DELETE http://api.todo/v1/{project-id}/{taskId}
 ```
-###Params:
+### Params:
 ```
 project-id - unique id of project
 taskId - unique id of task
