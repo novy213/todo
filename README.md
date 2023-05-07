@@ -10,11 +10,11 @@ PUT http://api.todo/v1/project-id
 ```
 ###Params:
 ```
-(null)
+project-id - unique id of project
 ```
 ### Body:
 ```
-project-id - unique id of project
+(null)
 ```
 ### Response: 
 ```
@@ -23,8 +23,21 @@ project-id - unique id of project
   "message": null
 }
 ```
-```
-# 1.3 Remove task to project
+### 1.3 Remove task to project
 ```
 DELETE http://api.todo/v1/project-name/taskId
 ```
+**Params:**
+```
+(null)
+```
+**Body:**
+```
+project-id - unique id of project
+```
+**Response: **
+```
+{
+  "error":false,
+  "message": null
+}
