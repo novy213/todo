@@ -26,6 +26,24 @@ Task: each task will have:
 6. Deleting tasks from projects
 7. Changing the content of tasks in the project
 8. Marking the task as done
+
+### Database specification
+The database contains 3 tables properly connected with each other.
+<b>Users table:</b>
+- id - unique user ID
+- login - user login
+- password - user's encrypted password
+- name - user's name
+- surname - user's surname
+### Projects table:
+- id - unique id of the project
+- user_id - field corresponding to the id field in the users table, connected by the relation (1..n)
+- name - project name
+### Task table:
+- id - unique task id
+- project_id - field corresponding to the id field in the table projects linked by a relation (1..n)
+- description - task description
+- done - a boolean field indicating whether a given task has been completed
 # Api url
 ```
 http://api.todo/v1
