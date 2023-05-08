@@ -48,7 +48,7 @@ The database contains 3 tables properly connected with each other.
 ```
 http://api.todo/v1
 ```
-# 1.1 Create new project
+## 1.1 Create new project
 ```
 PUT http://api.todo/v1
 ```
@@ -69,7 +69,7 @@ PUT http://api.todo/v1
   "message": null
 }
 ```
-# 1.2 Delete project
+## 1.2 Delete project
 ```
 DELETE http://api.todo/v1/{project-id}
 ```
@@ -88,7 +88,7 @@ project-id - unique project id
   "message": null
 }
 ```
-# 1.3 Rename project
+## 1.3 Rename project
 ```
 PUT http://api.todo/v1/{project-id}
 ```
@@ -109,7 +109,7 @@ project-id - unique project id
   "message": null
 }
 ```
-# 2.1 Add task to project
+## 2.1 Add task to project
 ```
 PUT http://api.todo/v1/{project-id}
 ```
@@ -130,7 +130,7 @@ project-id - unique id of project
   "message": null
 }
 ```
-# 2.2 Remove task to project
+## 2.2 Remove task to project
 ```
 DELETE http://api.todo/v1/{project-id}/{taskId}
 ```
@@ -150,7 +150,7 @@ taskId - unique id of task
   "message": null
 }
 ```
-# 2.3 Editing task
+## 2.3 Editing task
 ```
 PUT http://api.todo/v1/{project-id}/{taskId}
 ```
@@ -165,7 +165,7 @@ taskId - unique id of task
   "text":"new text",
 }
 ```
-# 2.4 Marked task as done
+## 2.4 Marked task as done
 ```
 PUT http://api.todo/v1/{project-id}/{taskId}
 ```
@@ -187,7 +187,7 @@ taskId - unique id of task
   "message": null
 }
 ```
-# 3.1 Get projects list
+## 3.1 Get projects list
 ```
 GET http://api.todo/v1
 ```
@@ -216,7 +216,7 @@ GET http://api.todo/v1
   ]
 }
 ```
-# 3.2 Get tasks list
+## 3.2 Get tasks list
 ```
 GET http://api.todo/v1/{project-id}
 ```
