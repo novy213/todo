@@ -1,8 +1,8 @@
 # Specification
-Todo - an application that allows us to create projects and add tasks to them.
-The application consists of 2 modules (server part and user part).
-The server part is made in the php Yii2 framework and the user part in the WPF framework.
-Functions:
+Todo - an application that allows us to create projects and add tasks to them.<br>
+The application consists of 2 modules (server part and user part).<br>
+The server part is made in the php Yii2 framework and the user part in the WPF framework.<br>
+Functions:<br>
 1. Login/Registration
 2. Creating projects
 3. Deleting projects
