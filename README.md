@@ -2,7 +2,7 @@
 Todo - an application that allows us to create projects and add tasks to them.<br>
 The application consists of 2 modules (server part and user part).<br>
 The server part is made in the php Yii2 framework and the user part in the WPF framework, application uses rest Api.<br>
-### Data range:
+## Data range:
 User: each user will have the following fields:<br>
 - login
 - password
@@ -17,7 +17,7 @@ Task: each task will have:
 - id
 - task description
 
-### Functions:
+## Functions:
 1. Login/Registration
 2. Creating projects
 3. Deleting projects
