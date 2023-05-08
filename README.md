@@ -46,7 +46,7 @@ project-id - unique project id
 ```
 # 1.3 Rename project
 ```
-DELETE http://api.todo/v1/{project-id}
+PUT http://api.todo/v1/{project-id}
 ```
 ### Params:
 ```
