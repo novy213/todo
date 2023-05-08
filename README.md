@@ -27,9 +27,9 @@ Task: each task will have:
 7. Changing the content of tasks in the project
 8. Marking the task as done
 
-### Database specification
+## Database specification
 The database contains 3 tables properly connected with each other.
-<b>Users table:</b>
+### Users table:
 - id - unique user ID
 - login - user login
 - password - user's encrypted password
