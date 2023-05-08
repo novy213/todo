@@ -1,5 +1,16 @@
-# Info
-null<br>
+# Specification
+Todo - an application that allows us to create projects and add tasks to them.
+The application consists of 2 modules (server part and user part).
+The server part is made in the php Yii2 framework and the user part in the WPF framework.
+Functions:
+1. Login/Registration
+2. Creating projects
+3. Deleting projects
+4. Changing the name of the project
+5. Adding tasks to projects
+6. Deleting tasks from projects
+7. Changing the content of tasks in the project
+8. Marking the task as done
 # Api url
 ```
 http://api.todo/v1
@@ -119,6 +130,21 @@ taskId - unique id of task
 ```
 {
   "text":"new text",
+}
+```
+# Marked task as done
+```
+PUT http://api.todo/v1/{project-id}/{taskId}
+```
+### Params:
+```
+project-id - unique id of project
+taskId - unique id of task
+```
+### Body:
+```
+{
+  (null)
 }
 ```
 ### Response: 
