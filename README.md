@@ -8,12 +8,15 @@ User: each user will have the following fields:<br>
 - password
 - name
 - last name
+
 Project: each project will consist of the following data:
 - id
 - project name
+
 Task: each task will have:
 - id
 - task description
+
 ### Functions:
 1. Login/Registration
 2. Creating projects
