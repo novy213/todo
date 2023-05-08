@@ -132,7 +132,7 @@ taskId - unique id of task
   "message": null
 }
 ```
-# Editing task
+# 2.3 Editing task
 ```
 PUT http://api.todo/v1/{project-id}/{taskId}
 ```
@@ -147,7 +147,7 @@ taskId - unique id of task
   "text":"new text",
 }
 ```
-# Marked task as done
+# 2.4 Marked task as done
 ```
 PUT http://api.todo/v1/{project-id}/{taskId}
 ```
