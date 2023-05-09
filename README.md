@@ -47,7 +47,8 @@ The database contains 3 tables properly connected with each other.
 - project_id - field corresponding to the id field in the table projects linked by a relation (1..n)
 - description - task description
 - done - a boolean field indicating whether a given task has been completed
-# Api url
+# Api doc
+## Api url
 ```
 http://localhost/basic/web/index.php?r=
 ```
@@ -258,7 +259,7 @@ DELETE http://localhost/basic/web/index.php?r=site/deletetask
 ```
 ## 3.3 Editing task
 ```
-POST http://localhost/basic/web/index.php?r=site/deletetask
+POST http://localhost/basic/web/index.php?r=site/edittask
 ```
 ### Params:
 ```
@@ -332,3 +333,4 @@ GET http://localhost/basic/web/index.php?r=site/gettasks
   ]
 }
 ```
+# Installation
