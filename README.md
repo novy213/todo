@@ -82,9 +82,7 @@ POST http://api.todo/v1
 ```
 ### Body:
 ```
-{
-  (null)
-}
+(null)
 ```
 ### Response: 
 ```
@@ -104,7 +102,7 @@ PUT http://api.todo/v1
 ### Body:
 ```
 {
-  "name":"project name",
+  "name":"project name"
 }
 ```
 ### Response: 
@@ -144,7 +142,7 @@ project-id - unique project id
 ### Body:
 ```
 {
-  "name": "new name",
+  "name": "new name"
 }
 ```
 ### Response: 
@@ -165,7 +163,7 @@ project-id - unique id of project
 ### Body:
 ```
 {
-  "text":"sample text",
+  "text":"sample text"
 }
 ```
 ### Response: 
@@ -207,7 +205,7 @@ taskId - unique id of task
 ### Body:
 ```
 {
-  "text":"new text",
+  "text":"new text"
 }
 ```
 ### Response: 
