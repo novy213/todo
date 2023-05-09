@@ -259,7 +259,7 @@ DELETE http://localhost/basic/web/index.php?r=site/deletetask
 ```
 ## 3.3 Editing task
 ```
-POST http://localhost/basic/web/index.php?r=site/deletetask
+POST http://localhost/basic/web/index.php?r=site/edittask
 ```
 ### Params:
 ```
