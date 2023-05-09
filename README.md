@@ -49,7 +49,7 @@ The database contains 3 tables properly connected with each other.
 - done - a boolean field indicating whether a given task has been completed
 # Api url
 ```
-http://api.todo/v1
+http://localhost/basic/web/index.php?r=
 ```
 ## 1.1 Login
 ```
