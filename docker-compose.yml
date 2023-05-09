@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+
+  phpdb:
+    image: phpdb
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: mariadb:10.3
+    ports:
+        - 33007:3306
+    environment:
+      MYSQL_DATABASE: todo
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
