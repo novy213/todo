@@ -4,6 +4,7 @@ The application consists of 2 modules (server part and user part).<br>
 The server part is made in the php Yii2 framework and the user part in the WPF framework, application uses rest Api.<br>
 ## Data range:
 User: each user will have the following fields:<br>
+- id
 - login
 - password
 - name
@@ -12,10 +13,12 @@ User: each user will have the following fields:<br>
 Project: each project will consist of the following data:
 - id
 - project name
+- user_id
 
 Task: each task will have:
 - id
 - task description
+- project_id
 
 ## Functions:
 1. Login/Registration
@@ -50,7 +53,7 @@ http://api.todo/v1
 ```
 ## 1.1 Login
 ```
-POST http://api.todo/v1
+POST http://localhost/basic/web/index.php?r=auth/login
 ```
 ### Params:
 ```
@@ -74,7 +77,7 @@ POST http://api.todo/v1
 ```
 ## 1.2 Logout
 ```
-POST http://api.todo/v1
+DELETE http://localhost/basic/web/index.php?r=auth/logout
 ```
 ### Params:
 ```
@@ -91,9 +94,9 @@ POST http://api.todo/v1
   "message": null
 }
 ```
-## 2.1 Create new project
+## 1.3 Register
 ```
-PUT http://api.todo/v1
+POST http://localhost/basic/web/index.php?r=site/register
 ```
 ### Params:
 ```
@@ -102,144 +105,22 @@ PUT http://api.todo/v1
 ### Body:
 ```
 {
-  "name":"project name"
+  "login": "admin",
+  "password": "admin",
+  "name": "jan",
+  "last_name: "kowalski"
 }
 ```
 ### Response: 
 ```
 {
-  "error": false,
+  "error":false,
   "message": null
 }
 ```
-## 2.2 Delete project
+## 2.1 Get projects list
 ```
-DELETE http://api.todo/v1/{project-id}
-```
-### Params:
-```
-project-id - unique project id
-```
-### Body:
-```
-(null)
-```
-### Response: 
-```
-{
-  "error": false,
-  "message": null
-}
-```
-## 2.3 Rename project
-```
-PUT http://api.todo/v1/{project-id}
-```
-### Params:
-```
-project-id - unique project id
-```
-### Body:
-```
-{
-  "name": "new name"
-}
-```
-### Response: 
-```
-{
-  "error": false,
-  "message": null
-}
-```
-## 3.1 Add task to project
-```
-PUT http://api.todo/v1/{project-id}
-```
-### Params:
-```
-project-id - unique id of project
-```
-### Body:
-```
-{
-  "text":"sample text"
-}
-```
-### Response: 
-```
-{
-  "error": false,
-  "message": null
-}
-```
-## 3.2 Remove task from project
-```
-DELETE http://api.todo/v1/{project-id}/{taskId}
-```
-### Params:
-```
-project-id - unique id of project
-taskId - unique id of task
-```
-### Body:
-```
-(null)
-```
-### Response: 
-```
-{
-  "error": false,
-  "message": null
-}
-```
-## 3.3 Editing task
-```
-PUT http://api.todo/v1/{project-id}/{taskId}
-```
-### Params:
-```
-project-id - unique id of project
-taskId - unique id of task
-```
-### Body:
-```
-{
-  "text":"new text"
-}
-```
-### Response: 
-```
-{
-  "error": false,
-  "message": null
-}
-```
-## 3.4 Marked task as done
-```
-PUT http://api.todo/v1/{project-id}/{taskId}
-```
-### Params:
-```
-project-id - unique id of project
-taskId - unique id of task
-```
-### Body:
-```
-{
-  (null)
-}
-```
-### Response: 
-```
-{
-  "error": false,
-  "message": null
-}
-```
-## 4.1 Get projects list
-```
-GET http://api.todo/v1
+GET http://localhost/basic/web/index.php?r=site/getprojects
 ```
 ### Params:
 ```
@@ -257,26 +138,182 @@ GET http://api.todo/v1
   "projects": [
     {
       "id": 1,
-      "name": "project1"
+      "project_name": "project1",
+      "user_id": 1
     },
     {
       "id": 2,
-      "name": "project2"
+      "project_name": "project2",
+      "user_id": 2
     }
   ]
 }
 ```
-## 4.2 Get tasks list
+## 2.2 Create new project
 ```
-GET http://api.todo/v1/{project-id}
+POST http://localhost/basic/web/index.php?r=site/createproject
 ```
 ### Params:
 ```
-project-id - unique project id
+(null)
 ```
 ### Body:
 ```
+{
+  "project_name":"project name"
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
+}
+```
+## 2.3 Delete project
+```
+DELETE http://localhost/basic/web/index.php?r=site/deleteproject
+```
+### Params:
+```
 (null)
+```
+### Body:
+```
+{
+  "id": 1
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
+}
+```
+## 2.4 Rename project
+```
+POST http://localhost/basic/web/index.php?r=site/deleteproject
+```
+### Params:
+```
+(null)
+```
+### Body:
+```
+{
+  "id": 1,
+  "project_name": "new name"
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
+}
+```
+## 3.1 Add task to project
+```
+POST http://localhost/basic/web/index.php?r=site/addtask
+```
+### Params:
+```
+(null)
+```
+### Body:
+```
+{
+  "description":"sample text",
+  "project_id": 2
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
+}
+```
+## 3.2 Remove task from project
+```
+DELETE http://localhost/basic/web/index.php?r=site/deletetask
+```
+### Params:
+```
+(null)
+```
+### Body:
+```
+{
+  "id": 1
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
+}
+```
+## 3.3 Editing task
+```
+POST http://localhost/basic/web/index.php?r=site/deletetask
+```
+### Params:
+```
+(null)
+```
+### Body:
+```
+{
+  "id": 2,
+  "description": "new text"
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
+}
+```
+## 3.4 Marked task as done
+```
+POST http://localhost/basic/web/index.php?r=site/marktask
+```
+### Params:
+```
+(null)
+```
+### Body:
+```
+{
+  "id": 2,
+  "done": 1,
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
+}
+```
+
+## 3.5 Get tasks list
+```
+GET http://localhost/basic/web/index.php?r=site/gettasks
+```
+### Params:
+```
+(null)
+```
+### Body:
+```
+{
+  "project_id": 1
+}
 ```
 ### Response: 
 ```
@@ -286,11 +323,11 @@ project-id - unique project id
   "tasks": [
     {
       "id": 1,
-      "text": "task1"
+      "description": "task1"
     },
     {
       "id": 2,
-      "name": "task2"
+      "description": "task2"
     }
   ]
 }
