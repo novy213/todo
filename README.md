@@ -69,7 +69,7 @@ POST http://api.todo/v1
   "error": false,
   "message": null,
   "token": "50x9v0uqxvLsBctrX1brKOL1TRhw5oDt",
-  "user_id": 11
+  "userId": 11
 }
 ```
 ## 1.2 Logout
