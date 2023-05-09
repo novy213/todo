@@ -66,10 +66,31 @@ POST http://api.todo/v1
 ### Response: 
 ```
 {
-  "error":false,
+  "error": false,
   "message": null,
-  "token":"50x9v0uqxvLsBctrX1brKOL1TRhw5oDt",
-  user_id:11
+  "token": "50x9v0uqxvLsBctrX1brKOL1TRhw5oDt",
+  "user_id": 11
+}
+```
+## 1.2 Logout
+```
+POST http://api.todo/v1
+```
+### Params:
+```
+(null)
+```
+### Body:
+```
+{
+  (null)
+}
+```
+### Response: 
+```
+{
+  "error":false,
+  "message": null
 }
 ```
 ## 2.1 Create new project
