@@ -173,7 +173,7 @@ project-id - unique id of project
   "message": null
 }
 ```
-## 3.2 Remove task to project
+## 3.2 Remove task from project
 ```
 DELETE http://api.todo/v1/{project-id}/{taskId}
 ```
