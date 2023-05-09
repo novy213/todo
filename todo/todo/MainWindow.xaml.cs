@@ -115,9 +115,24 @@ namespace todo
             }
         }
 
-        private void EditTask_click(object sender, RoutedEventArgs e)
+        private async void EditTask_click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+            EditTask editTask = new EditTask { Owner = this };
+            if(editTask.ShowDialog() == true)
+            {
+                APIResponse res = await Api.EditTaskAsync(editTask.Description.Text, int.Parse(btn.Uid));
+                if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+                else GetTasksList(currentProject.Id);
+            }
+        }
 
+        private async void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            APIResponse res = await Api.MarkTaskAsync(int.Parse(checkBox.Uid), checkBox.IsChecked==true ? 1: 0);
+            if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+            else GetTasksList(currentProject.Id);
         }
     }
 }
