@@ -89,7 +89,7 @@ PUT http://api.todo/v1
 ### Response: 
 ```
 {
-  "error":false,
+  "error": false,
   "message": null
 }
 ```
@@ -108,7 +108,7 @@ project-id - unique project id
 ### Response: 
 ```
 {
-  "error":false,
+  "error": false,
   "message": null
 }
 ```
@@ -129,7 +129,7 @@ project-id - unique project id
 ### Response: 
 ```
 {
-  "error":false,
+  "error": false,
   "message": null
 }
 ```
@@ -150,7 +150,7 @@ project-id - unique id of project
 ### Response: 
 ```
 {
-  "error":false,
+  "error": false,
   "message": null
 }
 ```
@@ -170,7 +170,7 @@ taskId - unique id of task
 ### Response: 
 ```
 {
-  "error":false,
+  "error": false,
   "message": null
 }
 ```
@@ -187,6 +187,13 @@ taskId - unique id of task
 ```
 {
   "text":"new text",
+}
+```
+### Response: 
+```
+{
+  "error": false,
+  "message": null
 }
 ```
 ## 3.4 Marked task as done
