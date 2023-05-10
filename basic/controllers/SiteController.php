@@ -30,6 +30,7 @@ class SiteController extends Controller
      * 
      */
     public function actionRegister(){
+
         $post = $this->getJsonInput();        
         $user = new User();
         //$user->attributes = $post;
@@ -61,7 +62,6 @@ class SiteController extends Controller
     public function actionCreateproject(){
         $post = $this->getJsonInput();        
         $project = new Project();
-        //$user->attributes = $post;
         if (isset($post->project_name)) {
             $project->project_name = $post->project_name;
         }
@@ -81,8 +81,7 @@ class SiteController extends Controller
             ];
         }  
     }
-    public function actionGetprojects(){
-        $post = $this->getJsonInput();        
+    public function actionGetprojects(){           
         $user = Yii::$app->user->identity;
         if ($user != null) {            
             return [
@@ -97,17 +96,17 @@ class SiteController extends Controller
             ];
         }  
     }
-    public function actionRenameproject(){
+    public function actionRenameproject($project_id){
         $post = $this->getJsonInput();
-        $project = Project::find()->andWhere(['id'=>$post->id])->one();
+        $project = Project::find()->andWhere(['id'=>$project_id])->one();
         if(!$project){
             return [
                 'error' => true,
                 'message' => 'Project not found',
             ];
-        }
-        $project->project_name = $post->project_name;
+        }        
         if (!is_null($post)) {
+            $project->project_name = $post->project_name;
             $project->update();
             return [
                 'error' => FALSE,
@@ -120,31 +119,29 @@ class SiteController extends Controller
             ];
         }  
     }
-    public function actionDeleteproject(){
-        $post = $this->getJsonInput();
-        $project = Project::find()->andWhere(['id'=>$post->id])->one();
-        if(!$project){
+    public function actionDeleteproject($project_id){
+        if(!$project_id){
             return [
                 'error' => true,
                 'message' => 'Project not found',
             ];
         } else {
-            $project->delete();
+            $project = Project::find()->andWhere(['id'=>$project_id])->one();
+            Project::deleteAll(['id'=>$project->id]);
             return [
                 'error' => FALSE,
                 'message' => NULL,                
             ];
         }
     }
-    public function actionAddtask(){
+    public function actionAddtask($project_id){
         $post = $this->getJsonInput();        
         $task = new Task();
-        //$user->attributes = $post;
         if (isset($post->description)) {
             $task->description = $post->description;
         }
-        if (isset($post->project_id)) {
-            $task->project_id = $post->project_id;
+        if (isset($project_id)) {
+            $task->project_id = $project_id;
         }        
         if ($task->validate()) {
             $task->save();
@@ -159,17 +156,17 @@ class SiteController extends Controller
             ];
         }  
     }
-    public function actionEdittask(){
+    public function actionEdittask($task_id){
         $post = $this->getJsonInput();
-        $project = Task::find()->andWhere(['id'=>$post->id])->one();
+        $project = Task::find()->andWhere(['id'=>$task_id])->one();
         if(!$project){
             return [
                 'error' => true,
                 'message' => 'Task not found',
             ];
         }
-        $project->description = $post->description;
         if (!is_null($post)) {
+            $project->description = $post->description;
             $project->update();
             return [
                 'error' => FALSE,
@@ -182,15 +179,14 @@ class SiteController extends Controller
             ];
         }  
     }
-    public function actionGettasks(){
-        $post = $this->getJsonInput();        
-        if (!isset($post->project_id)) {
+    public function actionGettasks($project_id){        
+        if (!isset($project_id)) {
             return [
                 'error' => true,
                 'message' => 'project id is required',
             ];
         }
-        $task = Task::find()->andWhere(['project_id'=>$post->project_id])->all();
+        $task = Task::find()->andWhere(['project_id'=>$project_id])->all();
         if ($task != null) {            
             return [
                 'error' => FALSE,
@@ -204,13 +200,12 @@ class SiteController extends Controller
             ];
         }  
     }
-    public function actionDeletetask(){
-        $post = $this->getJsonInput();
-        $task = Task::find()->andWhere(['id'=>$post->id])->one();
+    public function actionDeletetask($task_id){
+        $task = Task::find()->andWhere(['id'=>$task_id])->one();
         if(!$task){
             return [
                 'error' => true,
-                'message' => 'Project not found',
+                'message' => 'Task not found',
             ];
         } else {
             $task->delete();
@@ -220,18 +215,18 @@ class SiteController extends Controller
             ];
         }
     }
-    public function actionMarktask(){
+    public function actionMarktask($task_id){
         $post = $this->getJsonInput();
-        $project = Task::find()->andWhere(['id'=>$post->id])->one();
-        if(!$project){
+        $task = Task::find()->andWhere(['id'=>$task_id])->one();
+        if(!$task){
             return [
                 'error' => true,
                 'message' => 'Task not found',
             ];
         }
-        $project->done = $post->done;
         if (!is_null($post)) {
-            $project->update();
+            $task->done = $post->done;
+            $task->update();
             return [
                 'error' => FALSE,
                 'message' => NULL,                
@@ -239,7 +234,7 @@ class SiteController extends Controller
         } else {
             return [
                 'error' => true,
-                'message' => $project->getErrorSummary(false),
+                'message' => $task->getErrorSummary(false),
             ];
         }  
     }

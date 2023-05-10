@@ -48,10 +48,6 @@ class Project extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
         ];
     }
-    
-    public function renameProject($newName){
-        $this->project_name = $newName;
-    }
 
     /**
      * Gets query for [[Tasks]].

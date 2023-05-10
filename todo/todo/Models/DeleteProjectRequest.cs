@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace todo.Models
 {
-    public class AddTaskRequest
+    public class DeleteProjectRequest
     {
-        [JsonProperty("description")]
-        public string Description { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
     }
 }

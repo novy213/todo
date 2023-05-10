@@ -42,6 +42,73 @@ $config = [
             ],
         ],
         'db' => $db,
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => false,
+            'rules' => [                        
+                [
+                    'pattern' => '/',
+                    'route' => '/auth/login',
+                    'verb' => 'POST',
+                ],         
+                [
+                    'pattern' => '/',
+                    'route' => '/auth/logout',
+                    'verb' => 'DELETE',
+                ],             
+                [
+                    'pattern' => '/<project_id:\d+>',
+                    'route' => '/site/gettasks',
+                    'verb' => 'GET',
+                ],                
+                [
+                    'pattern' => '/',
+                    'route' => '/site/getprojects',
+                    'verb' => 'GET',
+                ],
+                [
+                    'pattern' => '/register',
+                    'route' => '/site/register',
+                    'verb' => 'POST',
+                ],
+                [
+                    'pattern' => '/createproject',
+                    'route' => '/site/createproject',
+                    'verb' => 'POST',
+                ],
+                [
+                    'pattern' => '/<project_id:\d+>',
+                    'route' => '/site/deleteproject',
+                    'verb' => 'DELETE',
+                ],  
+                [
+                    'pattern' => '/<project_id:\d+>',
+                    'route' => '/site/renameproject',
+                    'verb' => 'PUT',
+                ],    
+                [
+                    'pattern' => '/<project_id:\d+>',
+                    'route' => '/site/addtask',
+                    'verb' => 'POST',
+                ],           
+                [
+                    'pattern' => '/project/<task_id:\d+>',
+                    'route' => '/site/deletetask',
+                    'verb' => 'DELETE',
+                ],
+                [
+                    'pattern' => '/project/<task_id:\d+>',
+                    'route' => '/site/edittask',
+                    'verb' => 'PUT',
+                ],    
+                [
+                    'pattern' => '/project/<task_id:\d+>',
+                    'route' => '/site/marktask',
+                    'verb' => 'POST',
+                ],    
+            ],    
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:todo"
         mc:Ignorable="d"
-        Title="EditTask" Height="200" Width="400">
+        WindowStartupLocation="CenterOwner"
+        Title="EditTask" Height="250" Width="400">
     <Grid Background="LightYellow">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -19,7 +20,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Edit task" FontSize="46" FontWeight="Bold"/>
         <TextBox x:Name="Description" Grid.RowSpan="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="10" TextWrapping="Wrap"/>
-        <Button Content="Change" Grid.Row="3" Width="120" Height="40" Margin="10 0" HorizontalAlignment="Right" Click="Edit_click"/>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="10 0" Grid.Row="3" Width="120" Height="40" Grid.Column="1" Click="Back_click"/>
+        <Button VerticalAlignment="Top" Content="Change" Grid.Row="3" Width="120" Height="40" Margin="10 0" HorizontalAlignment="Right" Click="Edit_click"/>
+        <Button VerticalAlignment="Top" Content="Back" HorizontalAlignment="Left" Margin="10 0" Grid.Row="3" Width="120" Height="40" Grid.Column="1" Click="Back_click"/>
     </Grid>
 </Window>

@@ -28,7 +28,7 @@ namespace todo
         public MainWindow()
         {
             InitializeComponent();
-            if (Settings.Default.accessToken != "") SetAppStateLogin();
+            if (Settings.Default.accessToken != "" && Settings.Default.user_id != 0) SetAppStateLogin();
             else SetAppStateLogout();
         }
 
@@ -50,6 +50,7 @@ namespace todo
         {
             LoginGrid.Visibility = Visibility.Collapsed;
             ProjectsGrid.Visibility = Visibility.Visible;
+            RegisterGrid.Visibility = Visibility.Collapsed;
             GetProjects();
         }   
         public async void GetProjects()
@@ -61,6 +62,7 @@ namespace todo
         public void SetAppStateLogout()
         {
             LoginGrid.Visibility = Visibility.Visible;
+            RegisterGrid.Visibility = Visibility.Collapsed;
             ProjectsGrid.Visibility = Visibility.Collapsed;
         }
 
@@ -84,16 +86,31 @@ namespace todo
         public async void GetTasksList(int project_id)
         {
             GetTasksListResponse res = await Api.GetTasksListAsync(project_id);
-            TasksListView.ItemsSource = res.Tasks;
+            if(res.Tasks!=null) TasksListView.ItemsSource = res.Tasks.OrderBy(item => item.Done);
         }
-        private void RenameProject_click(object sender, RoutedEventArgs e)
+        private async void RenameProject_click(object sender, RoutedEventArgs e)
         {
-
+            Button btn = sender as Button;
+            RenameProject renameProject = new RenameProject { Owner = this };
+            if(renameProject.ShowDialog() == true)
+            {
+                APIResponse res = await Api.RenameProjectAsync(int.Parse(btn.Uid), renameProject.NewName.Text);
+                if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+                else GetProjects();
+            }
         }
 
-        private void DeleteProject_click(object sender, RoutedEventArgs e)
+        private async void DeleteProject_click(object sender, RoutedEventArgs e)
         {
-
+            Button btn = sender as Button;
+            Project deleteProject = projects.Where(item => item.Id == int.Parse(btn.Uid)).ToList()[0];
+            MessageBoxResult mbresult = MessageBox.Show(deleteProject.Project_name + " will be deleted permanently, do you want to continue?", "Delete", MessageBoxButton.YesNo);
+            if (mbresult == MessageBoxResult.Yes)
+            {
+                APIResponse res = await Api.DeleteProjectAsync(int.Parse(btn.Uid));
+                if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+                else GetProjects();
+            }
         }
 
         private void TasksBack_click(object sender, RoutedEventArgs e)
@@ -119,7 +136,11 @@ namespace todo
         {
             Button btn = sender as Button;
             EditTask editTask = new EditTask { Owner = this };
-            if(editTask.ShowDialog() == true)
+            GetTasksListResponse response= await Api.GetTasksListAsync(currentProject.Id);
+            editTask.Description.Text = response.Tasks.Where(item => item.Id == int.Parse(btn.Uid)).ToList()[0].Description;
+            editTask.Description.Focus();
+            editTask.Description.SelectAll();
+            if (editTask.ShowDialog() == true)
             {
                 APIResponse res = await Api.EditTaskAsync(editTask.Description.Text, int.Parse(btn.Uid));
                 if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
@@ -133,6 +154,52 @@ namespace todo
             APIResponse res = await Api.MarkTaskAsync(int.Parse(checkBox.Uid), checkBox.IsChecked==true ? 1: 0);
             if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
             else GetTasksList(currentProject.Id);
+        }
+
+        private async void DeleteTask_click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            APIResponse res = await Api.DeleteTaskAsync(int.Parse(btn.Uid));
+            if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+            else GetTasksList(currentProject.Id);
+        }
+
+        private async void AddProject_click(object sender, RoutedEventArgs e)
+        {
+            CreateProject createProject = new CreateProject { Owner = this };
+            if(createProject.ShowDialog() == true)
+            {
+                APIResponse res = await Api.CreateProjectAsync(Settings.Default.user_id, createProject.ProjectName.Text);
+                if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+                else GetProjects();
+            }
+        }
+
+        private void BackRegister_click(object sender, RoutedEventArgs e)
+        {
+            RegisterGrid.Visibility = Visibility.Collapsed;
+            LoginGrid.Visibility = Visibility.Visible;
+        }
+
+        private async void Register_click(object sender, RoutedEventArgs e)
+        {
+            string login = LoginRegister.Text;
+            string password = PasswordRegister.Text;
+            string name = NameRegister.Text;
+            string last_name = LNameRegister.Text;
+            APIResponse res = await Api.RegisterAsync(login, password, name, last_name);
+            if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+            else
+            {
+                RegisterGrid.Visibility = Visibility.Collapsed;
+                LoginGrid.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void GoToRegister_click(object sender, RoutedEventArgs e)
+        {
+            RegisterGrid.Visibility = Visibility.Visible;
+            LoginGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

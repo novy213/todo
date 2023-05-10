@@ -9,8 +9,6 @@ namespace todo.Models
 {
     public class EditTaskRequest
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
         [JsonProperty("description")]
         public string Description { get; set; }
     }

@@ -14,27 +14,202 @@ namespace todo
     public class Api
     {
         private const string HEADER_AUTHORIZATION = "Authorization";
-        private const string API_ENDPOINT_LOGIN = "auth/login";
-        private const string API_ENDPOINT_LOGOUT = "auth/logout";
-        private const string API_ENDPOINT_GET_PROJECTS = "site/getprojects";
-        private const string API_ENDPOINT_GET_TASKS = "site/gettasks";
-        private const string API_ENDPOINT_ADD_TASK = "site/addtask";
-        private const string API_ENDPOINT_EDIT_TASK = "site/edittask";
-        private const string API_ENDPOINT_MARK_TASK = "site/marktask";
+        private const string API_ENDPOINT_LOGIN = "/";
+        private const string API_ENDPOINT_LOGOUT = "/";
+        private const string API_ENDPOINT_GET_TASKS = "/";
+        private const string API_ENDPOINT_GET_PROJECTS = "/";
+        private const string API_ENDPOINT_ADD_TASK = "/";
+        private const string API_ENDPOINT_EDIT_TASK = "/project/";
+        private const string API_ENDPOINT_MARK_TASK = "/project/";
+        private const string API_ENDPOINT_DELETE_TASK = "/project/";
+        private const string API_ENDPOINT_CREATE_PROJECT = "/createproject";
+        private const string API_ENDPOINT_DELETE_PROJECT = "/";
+        private const string API_ENDPOINT_RENAME_PROJECT = "/";
+        private const string API_ENDPOINT_REGISTER = "/register";
 
         private const int HTTP_STATUS_OK = 200;
         private const int HTTP_STATUS_UNAUTHORIZED = 401;
 
         private static String Message;
+        public static async Task<APIResponse> RegisterAsync(string Login, string Password, string Name, string Last_name)
+        {
+            APIResponse response;
+            RegisterRequest request = new RegisterRequest
+            {
+                Login = Login,
+                Password = Password,
+                Name = Name,
+                Last_name = Last_name
+            };
+            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_REGISTER).body<RegisterRequest>(request);
+            try
+            {
+                HttpResponse<String> rawResponse = await MakeRequestAsync(req);
+                if (rawResponse == null)
+                {
+                    response = new APIResponse
+                    {
+                        Error = true,
+                        Message = Message
+                    };
+                }
+                else
+                {
+                    response = JsonConvert.DeserializeObject<APIResponse>(rawResponse.Body);
+                }
+
+            }
+            catch (Exception)
+            {
+                response = new APIResponse
+                {
+                    Error = true,
+                    Message = "Unable to deserialize response from remote server"
+                };
+            }
+            return response;
+        }
+        public static async Task<APIResponse> RenameProjectAsync(int Id, string Project_name)
+        {
+            APIResponse response;
+            RenameProjectRequest request = new RenameProjectRequest
+            {
+                Project_name = Project_name
+            };
+            HttpRequest req = Unirest.put(Settings.Default.url + API_ENDPOINT_RENAME_PROJECT + Id).body<RenameProjectRequest>(request);
+            try
+            {
+                HttpResponse<String> rawResponse = await MakeRequestAsync(req);
+                if (rawResponse == null)
+                {
+                    response = new APIResponse
+                    {
+                        Error = true,
+                        Message = Message
+                    };
+                }
+                else
+                {
+                    response = JsonConvert.DeserializeObject<APIResponse>(rawResponse.Body);
+                }
+
+            }
+            catch (Exception)
+            {
+                response = new APIResponse
+                {
+                    Error = true,
+                    Message = "Unable to deserialize response from remote server"
+                };
+            }
+            return response;
+        }
+        public static async Task<APIResponse> DeleteProjectAsync(int Id)
+        {
+            APIResponse response;
+            HttpRequest req = Unirest.delete(Settings.Default.url + API_ENDPOINT_DELETE_PROJECT + Id);
+            try
+            {
+                HttpResponse<String> rawResponse = await MakeRequestAsync(req);
+                if (rawResponse == null)
+                {
+                    response = new APIResponse
+                    {
+                        Error = true,
+                        Message = Message
+                    };
+                }
+                else
+                {
+                    response = JsonConvert.DeserializeObject<APIResponse>(rawResponse.Body);
+                }
+
+            }
+            catch (Exception)
+            {
+                response = new APIResponse
+                {
+                    Error = true,
+                    Message = "Unable to deserialize response from remote server"
+                };
+            }
+            return response;
+        }
+        public static async Task<APIResponse> CreateProjectAsync(int User_id, string Project_name)
+        {
+            APIResponse response;
+            CreateProjectRequest request = new CreateProjectRequest
+            {
+                User_id = User_id,
+                Project_name = Project_name
+            };
+            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_CREATE_PROJECT).body<CreateProjectRequest>(request);
+            try
+            {
+                HttpResponse<String> rawResponse = await MakeRequestAsync(req);
+                if (rawResponse == null)
+                {
+                    response = new APIResponse
+                    {
+                        Error = true,
+                        Message = Message
+                    };
+                }
+                else
+                {
+                    response = JsonConvert.DeserializeObject<APIResponse>(rawResponse.Body);
+                }
+
+            }
+            catch (Exception)
+            {
+                response = new APIResponse
+                {
+                    Error = true,
+                    Message = "Unable to deserialize response from remote server"
+                };
+            }
+            return response;
+        }
+        public static async Task<APIResponse> DeleteTaskAsync(int Id)
+        {
+            APIResponse response;
+            HttpRequest req = Unirest.delete(Settings.Default.url + API_ENDPOINT_DELETE_TASK + Id);
+            try
+            {
+                HttpResponse<String> rawResponse = await MakeRequestAsync(req);
+                if (rawResponse == null)
+                {
+                    response = new APIResponse
+                    {
+                        Error = true,
+                        Message = Message
+                    };
+                }
+                else
+                {
+                    response = JsonConvert.DeserializeObject<APIResponse>(rawResponse.Body);
+                }
+
+            }
+            catch (Exception)
+            {
+                response = new APIResponse
+                {
+                    Error = true,
+                    Message = "Unable to deserialize response from remote server"
+                };
+            }
+            return response;
+        }
         public static async Task<APIResponse> MarkTaskAsync(int Id, int Done)
         {
             APIResponse response;
             MarkTaskRequest request = new MarkTaskRequest
             {
-                Id = Id,
                 Done = Done
             };
-            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_MARK_TASK).body<MarkTaskRequest>(request);
+            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_MARK_TASK + Id).body<MarkTaskRequest>(request);
             try
             {
                 HttpResponse<String> rawResponse = await MakeRequestAsync(req);
@@ -67,10 +242,9 @@ namespace todo
             APIResponse response;
             EditTaskRequest request = new EditTaskRequest
             {
-                Id = Id,
                 Description = Description
             };
-            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_EDIT_TASK).body<EditTaskRequest>(request);
+            HttpRequest req = Unirest.put(Settings.Default.url + API_ENDPOINT_EDIT_TASK + Id).body<EditTaskRequest>(request);
             try
             {
                 HttpResponse<String> rawResponse = await MakeRequestAsync(req);
@@ -103,10 +277,9 @@ namespace todo
             APIResponse response;
             AddTaskRequest request = new AddTaskRequest
             {
-                Project_id = Project_id,
                 Description = Description
             };
-            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_ADD_TASK).body<AddTaskRequest>(request);
+            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_ADD_TASK + Project_id).body<AddTaskRequest>(request);
             try
             {
                 HttpResponse<String> rawResponse = await MakeRequestAsync(req);
@@ -137,11 +310,7 @@ namespace todo
         public static async Task<GetTasksListResponse> GetTasksListAsync(int Project_id)
         {
             GetTasksListResponse response;
-            GetTasksListRequest request = new GetTasksListRequest
-            {
-                Project_id = Project_id
-            };
-            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_GET_TASKS).body<GetTasksListRequest>(request);
+            HttpRequest req = Unirest.get(Settings.Default.url + API_ENDPOINT_GET_TASKS + Project_id);
             try
             {
                 HttpResponse<String> rawResponse = await MakeRequestAsync(req);
@@ -208,8 +377,7 @@ namespace todo
                 Login = Login,
                 Password = Password
             };
-            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_LOGIN)
-                .body<LoginRequest>(loginInfo);
+            HttpRequest req = Unirest.post(Settings.Default.url + API_ENDPOINT_LOGIN).body<LoginRequest>(loginInfo);
             try
             {
                 HttpResponse<String> rawResponse = await MakeRequestAsync(req);
@@ -227,6 +395,7 @@ namespace todo
                     if (rawResponse.Code == HTTP_STATUS_OK)
                     {
                         Settings.Default.accessToken = response.Token;
+                        Settings.Default.user_id = response.User_id;
                         Settings.Default.Save();
                     }
                 }
@@ -263,6 +432,7 @@ namespace todo
                     if (rawResponse.Code == HTTP_STATUS_OK)
                     {
                         Settings.Default.accessToken = "";
+                        Settings.Default.user_id = 0;
                         Settings.Default.Save();
                     }
                 }

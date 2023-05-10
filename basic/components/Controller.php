@@ -35,7 +35,7 @@ class Controller extends \yii\web\Controller
         try {
             return parent::runAction($id, $params);
         } catch (\yii\web\HttpException $e) {
-            Yii::error($e);
+            Yii::error($e);            
             Yii::$app->response->statusCode = $e->statusCode;
             return [
                 'error' => true,
@@ -43,6 +43,7 @@ class Controller extends \yii\web\Controller
             ];
         } catch (\Exception $e) {
             Yii::error($e);
+            print_r($e);
             Yii::$app->response->statusCode = 500;
             return [
                 'error' => true,
