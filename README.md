@@ -214,17 +214,16 @@ project_id - unique id of the project
 ```
 ## 3.1 Add task to project
 ```
-POST http://localhost/basic/web/index.php?r=site/addtask
+POST http://localhost/basic/web/{project_id}
 ```
 ### Params:
 ```
-(null)
+project_id - unique id of the project
 ```
 ### Body:
 ```
 {
-  "description":"sample text",
-  "project_id": 2
+  "description":"sample text"
 }
 ```
 ### Response: 
@@ -236,17 +235,15 @@ POST http://localhost/basic/web/index.php?r=site/addtask
 ```
 ## 3.2 Remove task from project
 ```
-DELETE http://localhost/basic/web/index.php?r=site/deletetask
+DELETE http://localhost/basic/web/project/{task_id}
 ```
 ### Params:
 ```
-(null)
+task_id - unique id of the task
 ```
 ### Body:
 ```
-{
-  "id": 1
-}
+(null)
 ```
 ### Response: 
 ```
@@ -257,16 +254,15 @@ DELETE http://localhost/basic/web/index.php?r=site/deletetask
 ```
 ## 3.3 Editing task
 ```
-POST http://localhost/basic/web/index.php?r=site/edittask
+PUT http://localhost/basic/web/project/{task_id}
 ```
 ### Params:
 ```
-(null)
+task_id - unique id of the task
 ```
 ### Body:
 ```
 {
-  "id": 2,
   "description": "new text"
 }
 ```
@@ -279,17 +275,16 @@ POST http://localhost/basic/web/index.php?r=site/edittask
 ```
 ## 3.4 Marked task as done
 ```
-POST http://localhost/basic/web/index.php?r=site/marktask
+POST http://localhost/basic/web/project/{task_id}
 ```
 ### Params:
 ```
-(null)
+task_id - unique id of the task
 ```
 ### Body:
 ```
 {
-  "id": 2,
-  "done": 1,
+  "done": 1
 }
 ```
 ### Response: 
@@ -302,17 +297,15 @@ POST http://localhost/basic/web/index.php?r=site/marktask
 
 ## 3.5 Get tasks list
 ```
-GET http://localhost/basic/web/index.php?r=site/gettasks
+GET http://localhost/basic/web/{project_id}
 ```
 ### Params:
 ```
-(null)
+project_id - unique id of the project
 ```
 ### Body:
 ```
-{
-  "project_id": 1
-}
+(null)
 ```
 ### Response: 
 ```
