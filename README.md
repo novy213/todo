@@ -121,7 +121,7 @@ POST http://localhost/basic/web/register
 ```
 ## 2.1 Get projects list
 ```
-GET http://localhost/basic/web/index.php?r=site/getprojects
+GET http://localhost/basic/web/
 ```
 ### Params:
 ```
@@ -152,7 +152,7 @@ GET http://localhost/basic/web/index.php?r=site/getprojects
 ```
 ## 2.2 Create new project
 ```
-POST http://localhost/basic/web/index.php?r=site/createproject
+POST http://localhost/basic/web/createproject
 ```
 ### Params:
 ```
@@ -174,17 +174,15 @@ POST http://localhost/basic/web/index.php?r=site/createproject
 ```
 ## 2.3 Delete project
 ```
-DELETE http://localhost/basic/web/index.php?r=site/deleteproject
+DELETE http://localhost/basic/web/{project_id}
 ```
 ### Params:
 ```
-(null)
+project_id - unique id of the project
 ```
 ### Body:
 ```
-{
-  "id": 1
-}
+(null)
 ```
 ### Response: 
 ```
