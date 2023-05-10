@@ -161,7 +161,8 @@ POST http://localhost/basic/web/index.php?r=site/createproject
 ### Body:
 ```
 {
-  "project_name":"project name"
+  "project_name":"project name",
+  "user_id": 2
 }
 ```
 ### Response: 
