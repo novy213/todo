@@ -54,7 +54,7 @@ http://localhost/basic/web/index.php?r=
 ```
 ## 1.1 Login
 ```
-POST http://localhost/basic/web/index.php?r=auth/login
+POST http://localhost/basic/web/
 ```
 ### Params:
 ```
@@ -63,8 +63,8 @@ POST http://localhost/basic/web/index.php?r=auth/login
 ### Body:
 ```
 {
-  "login":"test",
-  "password":"test"
+  "login": "test",
+  "password": "test"
 }
 ```
 ### Response: 
@@ -78,7 +78,7 @@ POST http://localhost/basic/web/index.php?r=auth/login
 ```
 ## 1.2 Logout
 ```
-DELETE http://localhost/basic/web/index.php?r=auth/logout
+DELETE http://localhost/basic/web/
 ```
 ### Params:
 ```
@@ -97,7 +97,7 @@ DELETE http://localhost/basic/web/index.php?r=auth/logout
 ```
 ## 1.3 Register
 ```
-POST http://localhost/basic/web/index.php?r=site/register
+POST http://localhost/basic/web/register
 ```
 ### Params:
 ```
