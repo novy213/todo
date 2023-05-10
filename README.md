@@ -193,16 +193,15 @@ project_id - unique id of the project
 ```
 ## 2.4 Rename project
 ```
-POST http://localhost/basic/web/index.php?r=site/deleteproject
+PUT http://localhost/basic/web/{project_id}
 ```
 ### Params:
 ```
-(null)
+project_id - unique id of the project
 ```
 ### Body:
 ```
-{
-  "id": 1,
+}
   "project_name": "new name"
 }
 ```
