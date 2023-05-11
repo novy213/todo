@@ -14,18 +14,18 @@ namespace todo
     public class Api
     {
         private const string HEADER_AUTHORIZATION = "Authorization";
-        private const string API_ENDPOINT_LOGIN = "/api";
-        private const string API_ENDPOINT_LOGOUT = "/api";
-        private const string API_ENDPOINT_GET_TASKS = "/api/";
-        private const string API_ENDPOINT_GET_PROJECTS = "/api";
-        private const string API_ENDPOINT_ADD_TASK = "/api/";
-        private const string API_ENDPOINT_EDIT_TASK = "/api/project/";
-        private const string API_ENDPOINT_MARK_TASK = "/api/project/";
-        private const string API_ENDPOINT_DELETE_TASK = "/api/project/";
-        private const string API_ENDPOINT_CREATE_PROJECT = "/api/createproject";
-        private const string API_ENDPOINT_DELETE_PROJECT = "/api/";
-        private const string API_ENDPOINT_RENAME_PROJECT = "/api/";
-        private const string API_ENDPOINT_REGISTER = "/api/register";
+        private const string API_ENDPOINT_LOGIN = "/api/todo";
+        private const string API_ENDPOINT_LOGOUT = "/api/todo";
+        private const string API_ENDPOINT_GET_TASKS = "/api/todo/";
+        private const string API_ENDPOINT_GET_PROJECTS = "/api/todo";
+        private const string API_ENDPOINT_ADD_TASK = "/api/todo/";
+        private const string API_ENDPOINT_EDIT_TASK = "/api/todo/project/";
+        private const string API_ENDPOINT_MARK_TASK = "/api/todo/project/";
+        private const string API_ENDPOINT_DELETE_TASK = "/api/todo/project/";
+        private const string API_ENDPOINT_CREATE_PROJECT = "/api/todo/createproject";
+        private const string API_ENDPOINT_DELETE_PROJECT = "/api/todo/";
+        private const string API_ENDPOINT_RENAME_PROJECT = "/api/todo/";
+        private const string API_ENDPOINT_REGISTER = "/api/todo/register";
 
         private const int HTTP_STATUS_OK = 200;
         private const int HTTP_STATUS_UNAUTHORIZED = 401;
