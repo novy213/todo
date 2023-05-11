@@ -50,7 +50,7 @@ The database contains 3 tables properly connected with each other.
 # Api doc
 ## Api url
 ```
-http://localhost/basic/web/index.php?r=
+http://localhost/basic/web/
 ```
 ## 1.1 Login
 ```
