@@ -51,6 +51,12 @@ namespace todo
             LoginGrid.Visibility = Visibility.Collapsed;
             ProjectsGrid.Visibility = Visibility.Visible;
             RegisterGrid.Visibility = Visibility.Collapsed;
+            LoginName.Text = "";
+            PasswordName.Text = "";
+            LNameRegister.Text = "";
+            LoginRegister.Text = "";
+            PasswordRegister.Text = "";
+            NameRegister.Text = "";
             GetProjects();
         }   
         public async void GetProjects()
@@ -159,9 +165,13 @@ namespace todo
         private async void DeleteTask_click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            APIResponse res = await Api.DeleteTaskAsync(int.Parse(btn.Uid));
-            if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
-            else GetTasksList(currentProject.Id);
+            MessageBoxResult mbresult = MessageBox.Show("This task will be deleted permanently, do you want to continue?", "Delete", MessageBoxButton.YesNo);
+            if (mbresult == MessageBoxResult.Yes)
+            {
+                APIResponse res = await Api.DeleteTaskAsync(int.Parse(btn.Uid));
+                if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+                else GetTasksList(currentProject.Id);
+            }
         }
 
         private async void AddProject_click(object sender, RoutedEventArgs e)
