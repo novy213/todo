@@ -50,11 +50,11 @@ The database contains 3 tables properly connected with each other.
 # Api doc
 ## Api url
 ```
-http://localhost/basic/web/
+/api
 ```
 ## 1.1 Login
 ```
-POST http://localhost/basic/web/
+POST /api
 ```
 ### Params:
 ```
@@ -78,7 +78,7 @@ POST http://localhost/basic/web/
 ```
 ## 1.2 Logout
 ```
-DELETE http://localhost/basic/web/
+DELETE /api
 ```
 ### Params:
 ```
@@ -97,7 +97,7 @@ DELETE http://localhost/basic/web/
 ```
 ## 1.3 Register
 ```
-POST http://localhost/basic/web/register
+POST /api/register
 ```
 ### Params:
 ```
@@ -121,7 +121,7 @@ POST http://localhost/basic/web/register
 ```
 ## 2.1 Get projects list
 ```
-GET http://localhost/basic/web/
+GET /api
 ```
 ### Params:
 ```
@@ -152,7 +152,7 @@ GET http://localhost/basic/web/
 ```
 ## 2.2 Create new project
 ```
-POST http://localhost/basic/web/createproject
+POST /api/createproject
 ```
 ### Params:
 ```
@@ -174,7 +174,7 @@ POST http://localhost/basic/web/createproject
 ```
 ## 2.3 Delete project
 ```
-DELETE http://localhost/basic/web/{project_id}
+DELETE /api/{project_id}
 ```
 ### Params:
 ```
@@ -193,7 +193,7 @@ project_id - unique id of the project
 ```
 ## 2.4 Rename project
 ```
-PUT http://localhost/basic/web/{project_id}
+PUT /api/{project_id}
 ```
 ### Params:
 ```
@@ -214,7 +214,7 @@ project_id - unique id of the project
 ```
 ## 3.1 Add task to project
 ```
-POST http://localhost/basic/web/{project_id}
+POST /api/{project_id}
 ```
 ### Params:
 ```
@@ -235,7 +235,7 @@ project_id - unique id of the project
 ```
 ## 3.2 Remove task from project
 ```
-DELETE http://localhost/basic/web/project/{task_id}
+DELETE /api/project/{task_id}
 ```
 ### Params:
 ```
@@ -254,7 +254,7 @@ task_id - unique id of the task
 ```
 ## 3.3 Editing task
 ```
-PUT http://localhost/basic/web/project/{task_id}
+PUT /api/project/{task_id}
 ```
 ### Params:
 ```
@@ -275,7 +275,7 @@ task_id - unique id of the task
 ```
 ## 3.4 Marked task as done
 ```
-POST http://localhost/basic/web/project/{task_id}
+POST /api/project/{task_id}
 ```
 ### Params:
 ```
@@ -297,7 +297,7 @@ task_id - unique id of the task
 
 ## 3.5 Get tasks list
 ```
-GET http://localhost/basic/web/{project_id}
+GET /api/{project_id}
 ```
 ### Params:
 ```
