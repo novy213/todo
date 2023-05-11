@@ -102,7 +102,8 @@ namespace todo
         public async void GetTasksList(int project_id)
         {
             GetTasksListResponse res = await Api.GetTasksListAsync(project_id);
-            if(res.Tasks!=null) TasksListView.ItemsSource = res.Tasks.OrderBy(item => item.Done);
+            if (res.Tasks != null) TasksListView.ItemsSource = res.Tasks.OrderBy(item => item.Done);
+            else TasksListView.ItemsSource = null;
         }
         private async void RenameProject_click(object sender, RoutedEventArgs e)
         {
