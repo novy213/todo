@@ -50,7 +50,7 @@ The database contains 3 tables properly connected with each other.
 # Api doc
 ## Api url
 ```
-/api
+/api/todo
 ```
 ## 1.1 Login
 ```
