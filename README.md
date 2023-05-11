@@ -54,7 +54,7 @@ The database contains 3 tables properly connected with each other.
 ```
 ## 1.1 Login
 ```
-POST /api
+POST /api/todo
 ```
 ### Params:
 ```
@@ -78,7 +78,7 @@ POST /api
 ```
 ## 1.2 Logout
 ```
-DELETE /api
+DELETE /api/todo
 ```
 ### Params:
 ```
@@ -97,7 +97,7 @@ DELETE /api
 ```
 ## 1.3 Register
 ```
-POST /api/register
+POST /api/todo/register
 ```
 ### Params:
 ```
@@ -121,7 +121,7 @@ POST /api/register
 ```
 ## 2.1 Get projects list
 ```
-GET /api
+GET /api/todo
 ```
 ### Params:
 ```
@@ -152,7 +152,7 @@ GET /api
 ```
 ## 2.2 Create new project
 ```
-POST /api/createproject
+POST /api/todo/createproject
 ```
 ### Params:
 ```
@@ -174,7 +174,7 @@ POST /api/createproject
 ```
 ## 2.3 Delete project
 ```
-DELETE /api/{project_id}
+DELETE /api/todo/{project_id}
 ```
 ### Params:
 ```
@@ -193,7 +193,7 @@ project_id - unique id of the project
 ```
 ## 2.4 Rename project
 ```
-PUT /api/{project_id}
+PUT /api/todo/{project_id}
 ```
 ### Params:
 ```
@@ -214,7 +214,7 @@ project_id - unique id of the project
 ```
 ## 3.1 Add task to project
 ```
-POST /api/{project_id}
+POST /api/todo/{project_id}
 ```
 ### Params:
 ```
@@ -235,7 +235,7 @@ project_id - unique id of the project
 ```
 ## 3.2 Remove task from project
 ```
-DELETE /api/project/{task_id}
+DELETE /api/todo/project/{task_id}
 ```
 ### Params:
 ```
@@ -254,7 +254,7 @@ task_id - unique id of the task
 ```
 ## 3.3 Editing task
 ```
-PUT /api/project/{task_id}
+PUT /api/todo/project/{task_id}
 ```
 ### Params:
 ```
@@ -275,7 +275,7 @@ task_id - unique id of the task
 ```
 ## 3.4 Marked task as done
 ```
-POST /api/project/{task_id}
+POST /api/todo/project/{task_id}
 ```
 ### Params:
 ```
@@ -297,7 +297,7 @@ task_id - unique id of the task
 
 ## 3.5 Get tasks list
 ```
-GET /api/{project_id}
+GET /api/todo/{project_id}
 ```
 ### Params:
 ```
