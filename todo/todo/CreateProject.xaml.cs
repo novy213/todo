@@ -25,7 +25,11 @@ namespace todo
         }
         private void Create_click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            if (ProjectName.Text == "")
+            {
+                MessageBox.Show("Project name cannot be empty", "Error");
+            }
+            else DialogResult = true;
         }
 
         private void Back_click(object sender, RoutedEventArgs e)

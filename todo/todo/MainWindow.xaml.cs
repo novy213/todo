@@ -8,11 +8,13 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using System.Xml.Linq;
 using todo.Models;
 using todo.Properties;
 
@@ -36,14 +38,21 @@ namespace todo
         {
             string login = LoginName.Text;
             string password = PasswordName.Text;
-            APIResponse res = await Api.LoginAsync(login, password);
-            if (!res.Error)
+            if (login == "" || password == "")
             {
-                SetAppStateLogin();
+                MessageBox.Show("All fields are required", "Error");
             }
             else
             {
-                MessageBox.Show("Nie udało się zalogować", "Error", MessageBoxButton.OK);
+                APIResponse res = await Api.LoginAsync(login, password);
+                if (!res.Error)
+                {
+                    SetAppStateLogin();
+                }
+                else
+                {
+                    MessageBox.Show("Nie udało się zalogować", "Error", MessageBoxButton.OK);
+                }
             }
         }
         public void SetAppStateLogin()
@@ -86,6 +95,7 @@ namespace todo
             Button btn = sender as Button;            
             GetTasksList(int.Parse(btn.Uid));
             currentProject = projects.Where(item => item.Id == int.Parse(btn.Uid)).ToList()[0];
+            ProjectNameText.Text = currentProject.Project_name;
             ProjectGrid.Visibility = Visibility.Visible;
             ProjectsGrid.Visibility = Visibility.Collapsed;
         }
@@ -98,7 +108,10 @@ namespace todo
         {
             Button btn = sender as Button;
             RenameProject renameProject = new RenameProject { Owner = this };
-            if(renameProject.ShowDialog() == true)
+            renameProject.NewName.Text = projects.Where(item => item.Id == int.Parse(btn.Uid)).ToList()[0].Project_name;
+            renameProject.NewName.Focus();
+            renameProject.NewName.SelectAll();
+            if (renameProject.ShowDialog() == true)
             {
                 APIResponse res = await Api.RenameProjectAsync(int.Parse(btn.Uid), renameProject.NewName.Text);
                 if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
@@ -197,12 +210,19 @@ namespace todo
             string password = PasswordRegister.Text;
             string name = NameRegister.Text;
             string last_name = LNameRegister.Text;
-            APIResponse res = await Api.RegisterAsync(login, password, name, last_name);
-            if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+            if (login == "" || password == "" || name == "" || last_name == "")
+            {
+                MessageBox.Show("All fields are required", "Error");
+            }
             else
             {
-                RegisterGrid.Visibility = Visibility.Collapsed;
-                LoginGrid.Visibility = Visibility.Visible;
+                APIResponse res = await Api.RegisterAsync(login, password, name, last_name);
+                if (res.Error) MessageBox.Show(res.Message, "Error", MessageBoxButton.OK);
+                else
+                {
+                    RegisterGrid.Visibility = Visibility.Collapsed;
+                    LoginGrid.Visibility = Visibility.Visible;
+                }
             }
         }
 

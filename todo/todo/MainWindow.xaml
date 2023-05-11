@@ -76,14 +76,14 @@
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="15" x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                        <Border CornerRadius="15" x:Name="border" Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -91,19 +91,12 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border">
-                                    <Setter.Value>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="Black"/>
-                                            <GradientStop Color="White" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="LightGreen"/>
+                                <Setter Property="Background" TargetName="border" Value="LightGreen"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                <Setter Property="Background" TargetName="border" Value="DarkGreen"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="DarkGreen"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
@@ -117,7 +110,7 @@
         </Style>
     </Window.Resources>
     <Grid Background="Green">
-        <Grid x:Name="LoginGrid" Visibility="Visible">
+        <Grid x:Name="LoginGrid" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -127,13 +120,13 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Login" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="46" FontWeight="Bold"/>
-            <TextBlock Text="Login:" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" FontSize="16"/>
+            <TextBlock Foreground="White" Text="Login" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="46" FontWeight="Bold"/>
+            <TextBlock Text="Login" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10 13" FontSize="16" Foreground="White"/>
             <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="LoginName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="7" Width="140" Margin="10"/>
-            <TextBlock Text="Password" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="16" Margin="10"/>
+            <TextBlock Text="Password" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="16" Margin="10 13" Foreground="White"/>
             <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="PasswordName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Padding="7" Width="140" Margin="10"/>
-            <Button Style="{DynamicResource ButtonStyle1}" Content="Login"  HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Height="40" Grid.Row="2" Click="Login_click" Margin="10 0"/>
-            <Button Content="Register"  HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Width="120" Height="40" Grid.Row="2" Margin="10 0" Click="GoToRegister_click"/>
+            <Button Style="{DynamicResource ButtonStyle1}" Content="Login" Foreground="White" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Height="40" Grid.Row="2" Click="Login_click" Margin="10 0" Background="Green"/>
+            <Button Content="Register" Style="{DynamicResource ButtonStyle1}" FontSize="16" Foreground="White" Background="Green" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Width="120" Height="40" Grid.Row="2" Margin="10 0" Click="GoToRegister_click"/>
         </Grid>
         <Grid x:Name="ProjectsGrid" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -146,9 +139,10 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Width="120" Height="40" Content="Logout" Click="Logout_click"/>
-            <Button Content="Add project" Width="120" Height="40" Click="AddProject_click"/>
-            <ListView x:Name="ProjectsListView" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <TextBlock Foreground="white" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="20" Text="Projects"/>
+            <Button Style="{DynamicResource ButtonStyle1}" FontSize="16" Foreground="White" Background="Green" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Width="120" Height="40" Content="Logout" Click="Logout_click"/>
+            <Button Style="{DynamicResource ButtonStyle1}" FontSize="16" Foreground="White" Background="Green" Content="Add project" Width="120" Height="40" Click="AddProject_click"/>
+            <ListView Background="AliceBlue" x:Name="ProjectsListView" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Foreground" Value="Black"/>
@@ -194,9 +188,11 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Back" Width="120" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Click="TasksBack_click"/>
-            <Button Content="Add task" Grid.Row="1" Width="120" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Click="AddTask_click"/>
-            <ListView x:Name="TasksListView" Grid.RowSpan="4" Grid.ColumnSpan="2" Grid.Column="1" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <TextBlock Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Text="Tasks"/>
+            <Button Style="{DynamicResource ButtonStyle1}" FontSize="16" Foreground="White" Background="Green" Grid.Row="1" Content="Back" Width="120" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Click="TasksBack_click"/>
+            <Button Style="{DynamicResource ButtonStyle1}" FontSize="16" Foreground="White" Background="Green" Content="Add task" Grid.Row="2" Width="120" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Click="AddTask_click"/>
+            <TextBlock x:Name="ProjectNameText" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" FontSize="16" Foreground="white" FontWeight="Bold"/>
+            <ListView Background="AliceBlue" x:Name="TasksListView" Grid.RowSpan="4" Grid.ColumnSpan="2" Grid.Column="1" Margin="10 30 10 10" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Foreground" Value="Black"/>
@@ -260,17 +256,17 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Register" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="Bold"/>
-            <TextBlock Text="Login" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
-            <TextBox x:Name="LoginRegister" Grid.Column="1" Grid.Row="1" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
-            <TextBlock Text="Password" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
-            <TextBox x:Name="PasswordRegister" Grid.Column="1" Grid.Row="2" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
-            <TextBlock Text="Name" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
-            <TextBox x:Name="NameRegister" Grid.Column="1" Grid.Row="3" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
-            <TextBlock Text="Last name" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
-            <TextBox x:Name="LNameRegister" Grid.Column="1" Grid.Row="4" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
-            <Button Content="Back" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="40" Margin="10 0" Click="BackRegister_click"/>
-            <Button Content="Register" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Height="40" Margin="10 0" Click="Register_click"/>
+            <TextBlock Foreground="White" Text="Register" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="Bold"/>
+            <TextBlock Foreground="White" Text="Login" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
+            <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="LoginRegister" Grid.Column="1" Grid.Row="1" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
+            <TextBlock Foreground="White" Text="Password" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
+            <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="PasswordRegister" Grid.Column="1" Grid.Row="2" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
+            <TextBlock Foreground="White" Text="Name" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
+            <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="NameRegister" Grid.Column="1" Grid.Row="3" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
+            <TextBlock Foreground="White" Text="Last name" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="10 0"/>
+            <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="LNameRegister" Grid.Column="1" Grid.Row="4" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="7"/>
+            <Button Style="{DynamicResource ButtonStyle1}" FontSize="16" Foreground="White" Background="Green" Content="Back" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="40" Margin="10 0" Click="BackRegister_click"/>
+            <Button Style="{DynamicResource ButtonStyle1}" FontSize="16" Foreground="White" Background="Green" Content="Register" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Height="40" Margin="10 0" Click="Register_click"/>
         </Grid>
     </Grid>
 </Window>

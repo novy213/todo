@@ -25,7 +25,11 @@ namespace todo
         }
         private void Edit_click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            if(Description.Text == "")
+            {
+                MessageBox.Show("Description cannot be empty", "Error");
+            }
+            else DialogResult = true;
         }
 
         private void Back_click(object sender, RoutedEventArgs e)
