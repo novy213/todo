@@ -14,7 +14,7 @@ services:
     ports:
         - 33007:3306
     environment:
-      MYSQL_DATABASE: todo
+      MYSQL_DATABASE: tabela1
       MYSQL_PASSWORD: admin
       MYSQL_ROOT_PASSWORD: admin
     volumes:
