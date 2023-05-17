@@ -37,7 +37,7 @@ The database contains 3 tables properly connected with each other.
 - login - user login
 - password - user's encrypted password
 - name - user's name
-- surname - user's surname
+- last name - user's last name
 ### Projects table:
 - id - unique id of the project
 - user_id - field corresponding to the id field in the users table, connected by the relation (1..n)
