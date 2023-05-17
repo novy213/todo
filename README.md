@@ -2,9 +2,9 @@
 Todo - an application that allows us to create projects and add tasks to them.<br>
 The application consists of 2 modules (server part and user part).<br>
 The server part is made in the php Yii2 framework and the user part in the WPF framework, application uses rest Api.<br>
-[Wpf repo](https://github.com/novy213/todo-user)
-[Android repo](https://github.com/novy213/todo-user-android)
-[Server repo](https://github.com/novy213/todo-server)
+[Wpf repo](https://github.com/novy213/todo-user) <br>
+[Android repo](https://github.com/novy213/todo-user-android) <br>
+[Server repo](https://github.com/novy213/todo-server) <br>
 ## Data range:
 User: each user will have the following fields:<br>
 - id
